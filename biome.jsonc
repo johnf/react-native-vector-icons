@@ -19,8 +19,9 @@
       "!**/packages/generator-react-native-vector-icons/generators",
       "!**/packages/**/*/.fontcustom-manifest.json",
       "!**/packages/**/*/android/build",
-      "!**/packages/directory/src/generated",
-      "!**/packages/directory/build",
+      "!**/website/src/data/generated",
+      "!**/website/src/styles/generated",
+      "!**/website/dist",
       "!**/packages/icon-explorer/.owl",
       "!**/.nx",
 

@@ -1,0 +1,161 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Advanced" description="Custom fonts, animation, and dynamic font loading for React Native Vector Icons">
+  <div class="mx-auto max-w-4xl px-4 py-12 sm:px-6">
+
+    <!-- Page Header -->
+    <h1 class="gradient-text text-4xl font-bold mb-4" style="font-family: var(--font-heading)">
+      Advanced Usage
+    </h1>
+    <p class="text-lg leading-relaxed mb-12" style="color: var(--color-text-muted)">
+      Custom icon fonts, animation, and dynamic font loading.
+    </p>
+
+    <!-- Custom Fonts -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold mb-6" style="font-family: var(--font-heading); color: var(--color-text)">
+        Custom Fonts
+      </h2>
+      <p class="leading-relaxed mb-4" style="color: var(--color-text-muted)">
+        The best approach is to use the icon generator to create your own icon package. See the
+        <a href="https://github.com/oblador/react-native-vector-icons/blob/master/docs/CREATE_FONT_PACKAGE.md" class="underline-offset-2 hover:underline" style="color: var(--color-accent-cyan)" target="_blank" rel="noopener">CREATE_FONT_PACKAGE.md</a>
+        guide to learn how.
+      </p>
+      <p class="leading-relaxed mb-4" style="color: var(--color-text-muted)">
+        You can also use <code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); color: var(--color-accent-cyan); font-family: var(--font-mono)">createIconSet()</code>
+        directly in your project. This returns a custom icon component based on a <code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); font-family: var(--font-mono)">glyphMap</code>
+        where the key is the icon name and the value is either a UTF-8 character or its character code.
+      </p>
+      <p class="leading-relaxed mb-4" style="color: var(--color-text-muted)">
+        <code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); font-family: var(--font-mono)">postScriptName</code>
+        is the name of the PostScript font. Open the font in
+        <a href="https://fontdrop.info/" class="underline-offset-2 hover:underline" style="color: var(--color-accent-cyan)" target="_blank" rel="noopener">fontdrop.info</a>,
+        Font Book.app, or similar to learn the name. Also pass the
+        <code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); font-family: var(--font-mono)">fontFileName</code> argument for Android support.
+      </p>
+
+      <div class="code-block terminal-dots mb-6">
+        <pre class="px-4 pb-4 pt-2"><code>import {'{'} createIconSet {'}'} from "@react-native-vector-icons/common";
+
+const glyphMap = {'{'} "icon-name": 1234, test: "\u2206" {'}'};
+
+const Icon = createIconSet(glyphMap, {'{'}
+  postScriptName: "FontName",
+  fontFileName: "font-name.ttf",
+  fontSource: require("../fonts/font-name.ttf"), // optional, for dynamic loading
+{'}'});</code></pre>
+      </div>
+
+      <div class="p-4 rounded-lg border-l-4" style="background-color: var(--color-surface); border-color: var(--color-accent-cyan);">
+        <p class="text-sm font-medium mb-1" style="color: var(--color-accent-cyan); font-family: var(--font-heading)">Tip</p>
+        <p class="text-sm leading-relaxed" style="color: var(--color-text-muted)">
+          If you are not using dynamic font loading, make sure your font is copied into your app bundle.
+        </p>
+      </div>
+    </section>
+
+    <!-- Animation -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold mb-6" style="font-family: var(--font-heading); color: var(--color-text)">
+        Animation
+      </h2>
+      <p class="leading-relaxed mb-4" style="color: var(--color-text-muted)">
+        React Native ships with
+        <a href="https://reactnative.dev/docs/animated.html" class="underline-offset-2 hover:underline" style="color: var(--color-accent-cyan)" target="_blank" rel="noopener">Animated</a>,
+        a powerful animation library. To animate an icon, create an animated component:
+      </p>
+      <div class="code-block terminal-dots mb-6">
+        <pre class="px-4 pb-4 pt-2"><code>const AnimatedIcon = Animated.createAnimatedComponent(Icon);</code></pre>
+      </div>
+      <p class="leading-relaxed" style="color: var(--color-text-muted)">
+        You can also use the higher-level animation library
+        <a href="https://github.com/oblador/react-native-animatable" class="underline-offset-2 hover:underline" style="color: var(--color-accent-cyan)" target="_blank" rel="noopener">react-native-animatable</a>.
+      </p>
+    </section>
+
+    <!-- Dynamic Font Loading -->
+    <section class="mb-16" id="dynamic-loading">
+      <h2 class="text-2xl font-bold mb-6" style="font-family: var(--font-heading); color: var(--color-text)">
+        Dynamic Font Loading
+      </h2>
+      <p class="leading-relaxed mb-4" style="color: var(--color-text-muted)">
+        Fonts can be available in an app <strong>statically</strong> (since build time) or loaded <strong>dynamically</strong> at runtime.
+        Dynamic loading is useful for apps that use over-the-air updates and want to load new fonts with an update,
+        or when you need to use a font from a remote location.
+      </p>
+
+      <div class="p-4 rounded-lg border-l-4 mb-6" style="background-color: var(--color-surface); border-color: var(--color-accent-cyan);">
+        <p class="text-sm font-medium mb-1" style="color: var(--color-accent-cyan); font-family: var(--font-heading)">Platform Support</p>
+        <p class="text-sm leading-relaxed" style="color: var(--color-text-muted)">
+          Dynamic loading is supported on all platforms if you use Expo
+          (<a href="https://expo.dev/go" class="underline-offset-2 hover:underline" style="color: var(--color-accent-cyan)" target="_blank" rel="noopener">Expo Go</a>
+          or a
+          <a href="https://docs.expo.dev/develop/development-builds/introduction/" class="underline-offset-2 hover:underline" style="color: var(--color-accent-cyan)" target="_blank" rel="noopener">development build</a>).
+          In future, it should become available for all React Native projects via React Native core.
+        </p>
+      </div>
+
+      <h3 class="text-lg font-semibold mb-3" style="font-family: var(--font-heading); color: var(--color-accent-cyan)">
+        Static vs Dynamic Imports
+      </h3>
+      <p class="leading-relaxed mb-4" style="color: var(--color-text-muted)">
+        If you do not need dynamic loading, use the <code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); font-family: var(--font-mono)">/static</code> imports
+        (e.g. <code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); font-family: var(--font-mono)">@react-native-vector-icons/ionicons/static</code>)
+        for a smaller bundle.
+      </p>
+      <p class="leading-relaxed mb-4" style="color: var(--color-text-muted)">
+        By default, dynamic loading is enabled if you run Expo SDK &ge; 52. It does not change the way you work with the package:
+        if rendering an icon requires a font that is not known to the app, it will be loaded automatically and the icon will render as expected.
+      </p>
+
+      <div class="p-4 rounded-lg border-l-4 mb-6" style="background-color: var(--color-surface); border-color: #f59e0b;">
+        <p class="text-sm font-medium mb-1" style="color: #f59e0b; font-family: var(--font-heading)">Limitation</p>
+        <p class="text-sm leading-relaxed" style="color: var(--color-text-muted)">
+          Dynamic loading in <code class="text-xs px-1 py-0.5 rounded" style="background-color: var(--color-bg); font-family: var(--font-mono)">@react-native-vector-icons</code>
+          is currently limited to fonts bundled within the provided packages. It does not support Pro fonts (such as FontAwesome Pro).
+          However, you can use <code class="text-xs px-1 py-0.5 rounded" style="background-color: var(--color-bg); font-family: var(--font-mono)">createIconSet</code> with a
+          <code class="text-xs px-1 py-0.5 rounded" style="background-color: var(--color-bg); font-family: var(--font-mono)">fontSource</code> to enable dynamic loading for custom fonts.
+        </p>
+      </div>
+
+      <h3 class="text-lg font-semibold mb-3" style="font-family: var(--font-heading); color: var(--color-accent-cyan)">
+        API Functions
+      </h3>
+      <p class="leading-relaxed mb-4" style="color: var(--color-text-muted)">
+        <code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); font-family: var(--font-mono)">@react-native-vector-icons/common</code>
+        exports several functions to control dynamic loading:
+      </p>
+      <div class="overflow-x-auto rounded-lg border" style="border-color: var(--color-border)">
+        <table class="w-full text-sm" style="border-collapse: collapse">
+          <thead>
+            <tr style="background-color: var(--color-surface)">
+              <th class="text-left px-4 py-3 font-semibold" style="font-family: var(--font-heading); color: var(--color-text); border-bottom: 1px solid var(--color-border)">Function</th>
+              <th class="text-left px-4 py-3 font-semibold" style="font-family: var(--font-heading); color: var(--color-text); border-bottom: 1px solid var(--color-border)">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--color-border)">
+              <td class="px-4 py-3 whitespace-nowrap" style="color: var(--color-accent-cyan); font-family: var(--font-mono)">isDynamicLoadingEnabled</td>
+              <td class="px-4 py-3" style="color: var(--color-text-muted)">Returns whether dynamic loading is enabled.</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--color-border)">
+              <td class="px-4 py-3 whitespace-nowrap" style="color: var(--color-accent-cyan); font-family: var(--font-mono)">isDynamicLoadingSupported</td>
+              <td class="px-4 py-3" style="color: var(--color-text-muted)">Returns whether dynamic loading is supported by your runtime (checks that the necessary Expo features are present).</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--color-border)">
+              <td class="px-4 py-3 whitespace-nowrap" style="color: var(--color-accent-cyan); font-family: var(--font-mono)">setDynamicLoadingEnabled</td>
+              <td class="px-4 py-3" style="color: var(--color-text-muted)">Enables or disables dynamic loading.</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 whitespace-nowrap" style="color: var(--color-accent-cyan); font-family: var(--font-mono)">setDynamicLoadingErrorCallback</td>
+              <td class="px-4 py-3" style="color: var(--color-text-muted)">Sets a callback invoked when an error occurs during dynamic loading (e.g. a misconfigured OTA update missing a font file).</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>

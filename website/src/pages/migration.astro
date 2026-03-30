@@ -1,0 +1,207 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Migration" description="Migration guide for React Native Vector Icons between major versions">
+  <div class="mx-auto max-w-4xl px-4 py-12 sm:px-6">
+
+    <!-- Page Header -->
+    <h1 class="gradient-text text-4xl font-bold mb-4" style="font-family: var(--font-heading)">
+      Migration Guide
+    </h1>
+    <p class="text-lg leading-relaxed mb-12" style="color: var(--color-text-muted)">
+      Instructions for migrating from <code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); font-family: var(--font-mono)">react-native-vector-icons</code>
+      to the package-per-icon-set approach, or between major versions.
+    </p>
+
+    <!-- Codemod -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold mb-6" style="font-family: var(--font-heading); color: var(--color-text)">
+        Codemod
+      </h2>
+      <p class="leading-relaxed mb-4" style="color: var(--color-text-muted)">
+        A codemod is provided to help migrate your code and settings between major versions.
+      </p>
+      <div class="p-4 rounded-lg border-l-4 mb-6" style="background-color: var(--color-surface); border-color: #f59e0b;">
+        <p class="text-sm font-medium mb-1" style="color: #f59e0b; font-family: var(--font-heading)">Important</p>
+        <p class="text-sm leading-relaxed" style="color: var(--color-text-muted)">
+          Make sure your code is committed to git or backed up before executing the codemod.
+          Review all changes before committing them.
+        </p>
+      </div>
+      <div class="code-block terminal-dots mb-4">
+        <pre class="px-4 pb-4 pt-2"><code>npx @react-native-vector-icons/codemod</code></pre>
+      </div>
+      <p class="leading-relaxed" style="color: var(--color-text-dim)">
+        The codemod is a best effort. Read through all the manual steps below to ensure they have been completed.
+      </p>
+    </section>
+
+    <!-- Expo Migration -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold mb-6" style="font-family: var(--font-heading); color: var(--color-text)">
+        Expo
+      </h2>
+      <p class="leading-relaxed mb-4" style="color: var(--color-text-muted)">
+        To migrate from <code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); font-family: var(--font-mono)">@expo/vector-icons</code>,
+        run the codemod in your Expo project.
+        If you use <code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); font-family: var(--font-mono)">createIconSetFromIcoMoon</code>
+        or <code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); font-family: var(--font-mono)">createIconSetFromFontello</code>,
+        some manual steps may be required:
+      </p>
+      <div class="code-block mb-4">
+        <pre class="p-4"><code><span style="color: #ef4444">- import createIconSetFromFontello from '@expo/vector-icons/createIconSetFromFontello';</span>
+<span style="color: #22c55e">+ import createIconSetFromFontello from '@react-native-vector-icons/fontello';</span>
+
+<span style="color: #ef4444">- createIconSetFromFontello(fontelloConfig, 'fontello', require('path/to/fontello.ttf'));</span>
+<span style="color: #22c55e">+ createIconSetFromFontello(fontelloConfig, {'{'}
++     fontSource: require('path/to/fontello.ttf')
++ {'}'});</span></code></pre>
+      </div>
+    </section>
+
+    <!-- React Native CLI -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold mb-6" style="font-family: var(--font-heading); color: var(--color-text)">
+        React Native CLI Projects
+      </h2>
+      <p class="leading-relaxed mb-6" style="color: var(--color-text-muted)">
+        The codemod attempts to execute many of the manual steps listed below. Thoroughly check each section for any steps that are not automatically handled.
+      </p>
+
+      <!-- package.json: remove common -->
+      <h3 class="text-lg font-semibold mb-3" style="font-family: var(--font-heading); color: var(--color-accent-cyan)">
+        Remove @react-native-vector-icons/common
+      </h3>
+      <p class="leading-relaxed mb-4" style="color: var(--color-text-muted)">
+        In v12, the library has been simplified. Unless you are using
+        <code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); font-family: var(--font-mono)">createIconSet</code>
+        directly with your own font, remove the common package:
+      </p>
+      <div class="code-block terminal-dots mb-8">
+        <pre class="px-4 pb-4 pt-2"><code>npm uninstall @react-native-vector-icons/common</code></pre>
+      </div>
+
+      <!-- Move Pro fonts -->
+      <h3 class="text-lg font-semibold mb-3" style="font-family: var(--font-heading); color: var(--color-accent-cyan)">
+        Move FontAwesome Pro, Icomoon and Fontello Fonts
+      </h3>
+      <p class="leading-relaxed mb-4" style="color: var(--color-text-muted)">
+        These fonts should be in <code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); font-family: var(--font-mono)">rnvi-fonts</code>
+        (or a folder you defined in <code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); font-family: var(--font-mono)">package.json</code>).
+        They need to be moved to a subfolder named after the font package:
+      </p>
+      <div class="grid grid-cols-2 gap-3 mb-4">
+        {["fontawesome5-pro", "fontawesome6-pro", "fontello", "icomoon"].map(name => (
+          <div class="px-3 py-2 rounded-lg text-sm" style={`background-color: var(--color-surface); color: var(--color-accent-cyan); font-family: var(--font-mono); border: 1px solid var(--color-border)`}>
+            rnvi-fonts/{name}/
+          </div>
+        ))}
+      </div>
+      <div class="p-4 rounded-lg border-l-4 mb-8" style="background-color: var(--color-surface); border-color: #f59e0b;">
+        <p class="text-sm font-medium mb-1" style="color: #f59e0b; font-family: var(--font-heading)">Warning</p>
+        <p class="text-sm leading-relaxed" style="color: var(--color-text-muted)">
+          Only FontAwesome Pro fonts are supported by the codemod. Fontello and Icomoon fonts must be moved manually.
+        </p>
+      </div>
+
+      <!-- package.json changes -->
+      <h3 class="text-lg font-semibold mb-3" style="font-family: var(--font-heading); color: var(--color-accent-cyan)">
+        Update package.json Dependencies
+      </h3>
+      <p class="leading-relaxed mb-4" style="color: var(--color-text-muted)">
+        Remove <code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); font-family: var(--font-mono)">react-native-vector-icons</code>
+        from your dependencies and replace with the individual font packages you intend to use:
+      </p>
+      <div class="code-block terminal-dots mb-8">
+        <pre class="px-4 pb-4 pt-2"><code>npm uninstall react-native-vector-icons
+npm install @react-native-vector-icons/fontisto</code></pre>
+      </div>
+
+      <!-- Import updates -->
+      <h3 class="text-lg font-semibold mb-3" style="font-family: var(--font-heading); color: var(--color-accent-cyan)">
+        Update Imports
+      </h3>
+      <p class="leading-relaxed mb-4" style="color: var(--color-text-muted)">
+        Update your import statements to use the new package names:
+      </p>
+      <div class="code-block mb-8">
+        <pre class="p-4"><code><span style="color: var(--color-text-dim)">// Old</span>
+<span style="color: #ef4444">import Fontisto from "react-native-vector-icons";</span>
+
+<span style="color: var(--color-text-dim)">// New</span>
+<span style="color: #22c55e">import {'{'} Fontisto {'}'} from "@react-native-vector-icons/fontisto";</span></code></pre>
+      </div>
+
+      <!-- FontAwesome 5/6 props -->
+      <h3 class="text-lg font-semibold mb-3" style="font-family: var(--font-heading); color: var(--color-accent-cyan)">
+        FontAwesome 5 &amp; 6 Prop Changes
+      </h3>
+      <p class="leading-relaxed mb-4" style="color: var(--color-text-muted)">
+        The FontAwesome 5 and 6 fonts now take an
+        <code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); color: var(--color-accent-cyan); font-family: var(--font-mono)">iconType</code>
+        prop instead of a style name prop:
+      </p>
+      <div class="code-block mb-4">
+        <pre class="p-4"><code><span style="color: var(--color-text-dim)">// Old</span>
+<span style="color: #ef4444">&lt;FontAwesome5 name="house" solid /&gt;</span>
+
+<span style="color: var(--color-text-dim)">// New</span>
+<span style="color: #22c55e">&lt;FontAwesome5 name="house" iconType="solid" /&gt;</span></code></pre>
+      </div>
+      <p class="leading-relaxed mb-8" style="color: var(--color-text-dim)">
+        Note: The codemod assumes you used the naming from the old README for your component (e.g.
+        <code class="text-xs px-1 py-0.5 rounded" style="background-color: var(--color-surface); font-family: var(--font-mono)">FontAwesome5</code> or
+        <code class="text-xs px-1 py-0.5 rounded" style="background-color: var(--color-surface); font-family: var(--font-mono)">Icon</code>).
+        If you imported the component with another name, you will need to modify the codemod or make the changes yourself.
+      </p>
+    </section>
+
+    <!-- iOS Cleanup -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold mb-6" style="font-family: var(--font-heading); color: var(--color-text)">
+        iOS Cleanup
+      </h2>
+      <p class="leading-relaxed mb-4" style="color: var(--color-text-muted)">
+        You still need to add fonts in <code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); font-family: var(--font-mono)">Info.plist</code>,
+        but only those which you have installed. See the
+        <a href="/getting-started" class="underline-offset-2 hover:underline" style="color: var(--color-accent-cyan)">Getting Started</a>
+        guide for instructions on how to update it with the included script.
+      </p>
+
+      <div class="p-4 rounded-lg border-l-4 mb-6" style="background-color: var(--color-surface); border-color: #f59e0b;">
+        <p class="text-sm font-medium mb-1" style="color: #f59e0b; font-family: var(--font-heading)">Not Automated</p>
+        <p class="text-sm leading-relaxed" style="color: var(--color-text-muted)">
+          The following iOS cleanup steps are not supported by the codemod and must be done manually.
+        </p>
+      </div>
+
+      <ol class="list-decimal list-inside space-y-4" style="color: var(--color-text-muted)">
+        <li class="leading-relaxed">
+          If you are not using any other custom fonts, remove the <strong>Fonts</strong> folder and any fonts you have added.
+        </li>
+        <li class="leading-relaxed">
+          Select your project in the navigator, choose your app's target, go to the <strong>Build Phases</strong> tab,
+          and under <strong>Copy Bundle Resources</strong>, remove any old icon fonts.
+        </li>
+        <li class="leading-relaxed">
+          Remove any entries in <code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); font-family: var(--font-mono)">react-native.config.js</code>:
+        </li>
+      </ol>
+      <div class="code-block mt-4">
+        <pre class="p-4"><code>// react-native.config.js
+module.exports = {'{'}
+  dependencies: {'{'}
+    <span style="color: #ef4444">// Remove entries like this:</span>
+    <span style="color: #ef4444">"react-native-vector-icons": {'{'}
+      platforms: {'{'}
+        ios: null,
+      {'}'},
+    {'}'},</span>
+  {'}'},
+{'}'};</code></pre>
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>

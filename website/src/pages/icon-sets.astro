@@ -1,0 +1,132 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const activeIcons = [
+  { name: "AntDesign", source: "Ant Group", sourceUrl: "https://ant.design/components/icon", version: "4.4.2", icons: 449, family: "AntDesign" },
+  { name: "Feather", source: "Cole Bemis & Contributors", sourceUrl: "http://feathericons.com", version: "4.29.2", icons: 287, family: "Feather" },
+  { name: "FontAwesome", source: "Fonticons, Inc.", sourceUrl: "https://fontawesome.com/search", version: "7.2.0", icons: "2,806 free / 75,767 pro", family: "FontAwesome" },
+  { name: "Foundation", source: "ZURB, Inc.", sourceUrl: "http://zurb.com/playground/foundation-icon-fonts-3", version: "3.0", icons: 283, family: "Foundation" },
+  { name: "Ionicons", source: "Ionic", sourceUrl: "https://ionic.io/ionicons", version: "8.0.9", icons: "1,357", family: "Ionicons" },
+  { name: "MaterialDesignIcons", source: "MaterialDesignIcons.com", sourceUrl: "https://pictogrammers.com/library/mdi/", version: "7.4.47", icons: "7,448", family: "MaterialDesignIcons" },
+  { name: "Octicons", source: "GitHub, Inc.", sourceUrl: "https://primer.style/foundations/icons", version: "19.22.0", icons: 339, family: "Octicons" },
+  { name: "Lucide", source: "Lucide", sourceUrl: "https://lucide.dev/", version: "0.576.0", icons: "1,639", family: "Lucide" },
+];
+
+const legacyIcons = [
+  { name: "Entypo", source: "Daniel Bruce", sourceUrl: "http://entypo.com", version: "1.0.1", icons: 411, family: "Entypo" },
+  { name: "EvilIcons", source: "Alexander Madyankin & Roman Shamin", sourceUrl: "http://evil-icons.io", version: "1.10.1", icons: 70, family: "EvilIcons" },
+  { name: "FontAwesome 4", source: "Fonticons, Inc.", sourceUrl: "https://fontawesome.com/v4/icons", version: "4.7.0", icons: 785, family: "FontAwesome" },
+  { name: "FontAwesome 5", source: "Fonticons, Inc.", sourceUrl: "https://fontawesome.com/v5/search", version: "5.15.4", icons: "1,611 free / 7,869 pro", family: "FontAwesome5" },
+  { name: "FontAwesome 6", source: "Fonticons, Inc.", sourceUrl: "https://fontawesome.com/search", version: "6.7.2", icons: "2,060 free / 52,663 pro", family: "FontAwesome6" },
+  { name: "Fontisto", source: "Kenan Gundogan", sourceUrl: "https://github.com/kenangundogan/fontisto", version: "3.0.4", icons: 617, family: "Fontisto" },
+  { name: "MaterialIcons", source: "Google, Inc.", sourceUrl: "https://fonts.google.com/icons?icon.set=Material+Icons", version: "4.0.0", icons: "2,234", family: "MaterialIcons" },
+  { name: "SimpleLineIcons", source: "Sabbir & Contributors", sourceUrl: "https://simplelineicons.github.io/", version: "2.5.5", icons: 189, family: "SimpleLineIcons" },
+  { name: "Zocial", source: "Sam Collins", sourceUrl: "https://smcllns.github.io/css-social-buttons", version: "1.1.1", icons: 100, family: "Zocial" },
+];
+---
+
+<BaseLayout title="Icon Sets" description="Browse all available icon families in React Native Vector Icons">
+  <div class="mx-auto max-w-4xl px-4 py-12 sm:px-6">
+
+    <!-- Page Header -->
+    <h1 class="gradient-text text-4xl font-bold mb-4" style="font-family: var(--font-heading)">
+      Icon Sets
+    </h1>
+    <p class="text-lg leading-relaxed mb-4" style="color: var(--color-text-muted)">
+      RNVI ships with a wide range of icon families. You can also
+      <a href="https://www.npmjs.com/search?q=keywords%3Areact-native-vector-icons-icon" class="underline-offset-2 hover:underline" style="color: var(--color-accent-cyan)" target="_blank" rel="noopener">search NPM</a>
+      for third-party icon packages.
+    </p>
+    <p class="leading-relaxed mb-12" style="color: var(--color-text-muted)">
+      Browse all icons visually in the
+      <a href="/directory" class="underline-offset-2 hover:underline" style="color: var(--color-accent-cyan)">Icon Directory</a>.
+    </p>
+
+    <!-- Actively Maintained -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold mb-6" style="font-family: var(--font-heading); color: var(--color-text)">
+        Actively Maintained
+      </h2>
+      <div class="overflow-x-auto rounded-lg border" style="border-color: var(--color-border)">
+        <table class="w-full text-sm" style="border-collapse: collapse">
+          <thead>
+            <tr style="background-color: var(--color-surface)">
+              <th class="text-left px-4 py-3 font-semibold" style="font-family: var(--font-heading); color: var(--color-text); border-bottom: 1px solid var(--color-border)">Name</th>
+              <th class="text-left px-4 py-3 font-semibold" style="font-family: var(--font-heading); color: var(--color-text); border-bottom: 1px solid var(--color-border)">Source</th>
+              <th class="text-left px-4 py-3 font-semibold" style="font-family: var(--font-heading); color: var(--color-text); border-bottom: 1px solid var(--color-border)">Version</th>
+              <th class="text-left px-4 py-3 font-semibold" style="font-family: var(--font-heading); color: var(--color-text); border-bottom: 1px solid var(--color-border)">Icons</th>
+            </tr>
+          </thead>
+          <tbody>
+            {activeIcons.map((icon, i) => (
+              <tr style={`border-bottom: ${i < activeIcons.length - 1 ? '1px solid var(--color-border)' : 'none'}`}>
+                <td class="px-4 py-3">
+                  <a href={`/directory?family=${icon.family}`} class="underline-offset-2 hover:underline font-medium" style="color: var(--color-accent-cyan); font-family: var(--font-mono)">
+                    {icon.name}
+                  </a>
+                </td>
+                <td class="px-4 py-3">
+                  <a href={icon.sourceUrl} class="underline-offset-2 hover:underline" style="color: var(--color-text-muted)" target="_blank" rel="noopener">
+                    {icon.source}
+                  </a>
+                </td>
+                <td class="px-4 py-3" style="color: var(--color-text-dim); font-family: var(--font-mono)">{icon.version}</td>
+                <td class="px-4 py-3" style="color: var(--color-text-muted)">{icon.icons}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="p-4 rounded-lg border-l-4 mt-6" style="background-color: var(--color-surface); border-color: #f59e0b;">
+        <p class="text-sm font-medium mb-1" style="color: #f59e0b; font-family: var(--font-heading)">FontAwesome Pro</p>
+        <p class="text-sm leading-relaxed" style="color: var(--color-text-muted)">
+          FontAwesome Pro icons require a separate licence from
+          <a href="https://fontawesome.com" class="underline-offset-2 hover:underline" style="color: var(--color-accent-cyan)" target="_blank" rel="noopener">fontawesome.com</a>.
+          The free icons are included by default; Pro icons require you to provide the font files yourself.
+        </p>
+      </div>
+    </section>
+
+    <!-- No Longer Maintained -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold mb-6" style="font-family: var(--font-heading); color: var(--color-text)">
+        No Longer Maintained Upstream
+      </h2>
+      <p class="leading-relaxed mb-6" style="color: var(--color-text-muted)">
+        These icon sets are still available but are no longer actively maintained by their original authors.
+      </p>
+      <div class="overflow-x-auto rounded-lg border" style="border-color: var(--color-border)">
+        <table class="w-full text-sm" style="border-collapse: collapse">
+          <thead>
+            <tr style="background-color: var(--color-surface)">
+              <th class="text-left px-4 py-3 font-semibold" style="font-family: var(--font-heading); color: var(--color-text); border-bottom: 1px solid var(--color-border)">Name</th>
+              <th class="text-left px-4 py-3 font-semibold" style="font-family: var(--font-heading); color: var(--color-text); border-bottom: 1px solid var(--color-border)">Source</th>
+              <th class="text-left px-4 py-3 font-semibold" style="font-family: var(--font-heading); color: var(--color-text); border-bottom: 1px solid var(--color-border)">Version</th>
+              <th class="text-left px-4 py-3 font-semibold" style="font-family: var(--font-heading); color: var(--color-text); border-bottom: 1px solid var(--color-border)">Icons</th>
+            </tr>
+          </thead>
+          <tbody>
+            {legacyIcons.map((icon, i) => (
+              <tr style={`border-bottom: ${i < legacyIcons.length - 1 ? '1px solid var(--color-border)' : 'none'}`}>
+                <td class="px-4 py-3">
+                  <a href={`/directory?family=${icon.family}`} class="underline-offset-2 hover:underline font-medium" style="color: var(--color-accent-cyan); font-family: var(--font-mono)">
+                    {icon.name}
+                  </a>
+                </td>
+                <td class="px-4 py-3">
+                  <a href={icon.sourceUrl} class="underline-offset-2 hover:underline" style="color: var(--color-text-muted)" target="_blank" rel="noopener">
+                    {icon.source}
+                  </a>
+                </td>
+                <td class="px-4 py-3" style="color: var(--color-text-dim); font-family: var(--font-mono)">{icon.version}</td>
+                <td class="px-4 py-3" style="color: var(--color-text-muted)">{icon.icons}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>

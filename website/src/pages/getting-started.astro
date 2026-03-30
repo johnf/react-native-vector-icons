@@ -1,0 +1,279 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Getting Started" description="Installation and setup guide for React Native Vector Icons">
+  <div class="mx-auto max-w-4xl px-4 py-12 sm:px-6">
+
+    <!-- Page Header -->
+    <h1 class="gradient-text text-4xl font-bold mb-4" style="font-family: var(--font-heading)">
+      Getting Started
+    </h1>
+    <p class="text-lg leading-relaxed mb-12" style="color: var(--color-text-muted)">
+      Install and configure React Native Vector Icons for your platform.
+    </p>
+
+    <!-- Installation -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold mb-6" style="font-family: var(--font-heading); color: var(--color-text)">
+        Installation
+      </h2>
+      <p class="leading-relaxed mb-4" style="color: var(--color-text-muted)">
+        Install the packages for the icon sets you want to use. Each icon family is published as its own package under the
+        <code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); color: var(--color-accent-cyan); font-family: var(--font-mono)">@react-native-vector-icons</code> scope.
+      </p>
+      <div class="code-block terminal-dots">
+        <pre class="px-4 pb-4 pt-2"><code>npm install @react-native-vector-icons/fontawesome-free-solid @react-native-vector-icons/evil-icons</code></pre>
+      </div>
+      <p class="leading-relaxed mt-4" style="color: var(--color-text-muted)">
+        Then follow the setup instructions for your target platform below.
+      </p>
+    </section>
+
+    <!-- Platform Tabs -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold mb-6" style="font-family: var(--font-heading); color: var(--color-text)">
+        Platform Setup
+      </h2>
+
+      <!-- Tab Buttons -->
+      <div class="flex gap-2 mb-8 flex-wrap">
+        <button
+          class="platform-tab active px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+          style="font-family: var(--font-heading)"
+          data-tab="expo"
+        >
+          Expo
+        </button>
+        <button
+          class="platform-tab px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+          style="font-family: var(--font-heading)"
+          data-tab="react-native"
+        >
+          React Native
+        </button>
+        <button
+          class="platform-tab px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+          style="font-family: var(--font-heading)"
+          data-tab="web"
+        >
+          Web
+        </button>
+      </div>
+
+      <!-- Expo Tab -->
+      <div class="tab-content" id="tab-expo">
+        <h3 class="text-xl font-bold mb-4" style="font-family: var(--font-heading); color: var(--color-text)">
+          Expo
+        </h3>
+        <p class="leading-relaxed mb-4" style="color: var(--color-text-muted)">
+          Icon packages from <code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); color: var(--color-accent-cyan); font-family: var(--font-mono)">@react-native-vector-icons</code>
+          work out of the box with Expo, across all platforms. No additional configuration is required.
+        </p>
+        <div class="p-4 rounded-lg border-l-4 mb-4" style="background-color: var(--color-surface); border-color: #f59e0b;">
+          <p class="text-sm font-medium mb-1" style="color: #f59e0b; font-family: var(--font-heading)">Warning</p>
+          <p class="text-sm leading-relaxed" style="color: var(--color-text-muted)">
+            <strong>Avoid manual font duplication:</strong> do not add fonts from
+            <code class="text-xs px-1 py-0.5 rounded" style="background-color: var(--color-bg); font-family: var(--font-mono)">node_modules/@react-native-vector-icons/some-font</code>
+            to the <code class="text-xs px-1 py-0.5 rounded" style="background-color: var(--color-bg); font-family: var(--font-mono)">expo-font</code> plugin configuration unless you have a specific advanced use case.
+          </p>
+        </div>
+      </div>
+
+      <!-- React Native Tab -->
+      <div class="tab-content hidden" id="tab-react-native">
+        <h3 class="text-xl font-bold mb-4" style="font-family: var(--font-heading); color: var(--color-text)">
+          React Native CLI
+        </h3>
+
+        <!-- Android -->
+        <h4 class="text-lg font-semibold mb-3 mt-6" style="font-family: var(--font-heading); color: var(--color-accent-cyan)">
+          Android
+        </h4>
+        <p class="leading-relaxed mb-4" style="color: var(--color-text-muted)">
+          Rebuild your app. No extra steps are needed for Android.
+        </p>
+
+        <!-- iOS -->
+        <h4 class="text-lg font-semibold mb-3 mt-8" style="font-family: var(--font-heading); color: var(--color-accent-cyan)">
+          iOS
+        </h4>
+        <div class="p-4 rounded-lg border-l-4 mb-4" style="background-color: var(--color-surface); border-color: var(--color-accent-cyan);">
+          <p class="text-sm font-medium mb-1" style="color: var(--color-accent-cyan); font-family: var(--font-heading)">Tip</p>
+          <p class="text-sm leading-relaxed" style="color: var(--color-text-muted)">
+            You will need to follow these instructions any time you add a new font.
+          </p>
+        </div>
+
+        <p class="leading-relaxed mb-2" style="color: var(--color-text-muted)">
+          1. Run the plist update script to register your icon fonts:
+        </p>
+        <div class="code-block terminal-dots mb-4">
+          <pre class="px-4 pb-4 pt-2"><code>npx rnvi-update-plist package.json ios/AppName/Info.plist</code></pre>
+        </div>
+
+        <p class="leading-relaxed mb-2" style="color: var(--color-text-muted)">
+          2. Open <code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); font-family: var(--font-mono)">ios/Info.plist</code>
+          and verify that <strong>UIAppFonts</strong> contains the expected entries:
+        </p>
+        <div class="code-block mb-4">
+          <pre class="p-4"><code>&lt;key&gt;UIAppFonts&lt;/key&gt;
+&lt;array&gt;
+  &lt;string&gt;FontAwesome6_Brands.ttf&lt;/string&gt;
+  &lt;string&gt;FontAwesome6_Regular.ttf&lt;/string&gt;
+  &lt;string&gt;FontAwesome6_Solid.ttf&lt;/string&gt;
+  &lt;string&gt;Octicons.ttf&lt;/string&gt;
+&lt;/array&gt;</code></pre>
+        </div>
+
+        <p class="leading-relaxed mb-2" style="color: var(--color-text-muted)">
+          3. Install CocoaPods and rebuild:
+        </p>
+        <div class="code-block terminal-dots mb-4">
+          <pre class="px-4 pb-4 pt-2"><code>cd ios && pod install</code></pre>
+        </div>
+
+        <p class="leading-relaxed mb-4" style="color: var(--color-text-muted)">
+          4. Rebuild your app.
+        </p>
+
+        <!-- macOS -->
+        <h4 class="text-lg font-semibold mb-3 mt-8" style="font-family: var(--font-heading); color: var(--color-accent-cyan)">
+          macOS
+        </h4>
+        <p class="leading-relaxed mb-4" style="color: var(--color-text-muted)">
+          macOS support needs more work. See details in
+          <a href="https://github.com/oblador/react-native-vector-icons/issues/1624" class="underline-offset-2 hover:underline" style="color: var(--color-accent-cyan)">issue #1624</a>.
+        </p>
+
+        <!-- Windows -->
+        <h4 class="text-lg font-semibold mb-3 mt-8" style="font-family: var(--font-heading); color: var(--color-accent-cyan)">
+          Windows
+        </h4>
+        <ol class="list-decimal list-inside space-y-2 mb-4" style="color: var(--color-text-muted)">
+          <li class="leading-relaxed">Copy the needed fonts from <code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); font-family: var(--font-mono)">node_modules/react-native-vector-icons/Fonts/*</code> to <code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); font-family: var(--font-mono)">windows/&lt;Project&gt;/Assets/*</code></li>
+          <li class="leading-relaxed">Open your solution in Visual Studio, right-click on Assets, select Add Assets, then select your fonts, save and quit Visual Studio.</li>
+          <li class="leading-relaxed">Rebuild your project.</li>
+        </ol>
+      </div>
+
+      <!-- Web Tab -->
+      <div class="tab-content hidden" id="tab-web">
+        <h3 class="text-xl font-bold mb-4" style="font-family: var(--font-heading); color: var(--color-text)">
+          Web
+        </h3>
+
+        <h4 class="text-lg font-semibold mb-3 mt-6" style="font-family: var(--font-heading); color: var(--color-accent-cyan)">
+          react-native-web Setup
+        </h4>
+        <p class="leading-relaxed mb-4" style="color: var(--color-text-muted)">
+          To port a React Native mobile app to web using <code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); font-family: var(--font-mono)">react-native-web</code>,
+          ensure the fonts are known on the web side. Add the <code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); font-family: var(--font-mono)">@font-face</code> declarations for each font you use in your CSS.
+        </p>
+        <div class="code-block mb-6">
+          <pre class="p-4"><code>@font-face {'{'}
+  src: url(path/to/fonts/Ionicons.ttf);
+  font-family: "Ionicons";
+{'}'}
+
+@font-face {'{'}
+  src: url(path/to/fonts/FontAwesome.ttf);
+  font-family: "FontAwesome";
+{'}'}
+
+@font-face {'{'}
+  src: url(path/to/fonts/MaterialIcons.ttf);
+  font-family: "MaterialIcons";
+{'}'}</code></pre>
+        </div>
+
+        <h4 class="text-lg font-semibold mb-3 mt-8" style="font-family: var(--font-heading); color: var(--color-accent-cyan)">
+          Webpack Setup
+        </h4>
+        <p class="leading-relaxed mb-4" style="color: var(--color-text-muted)">
+          If you are using webpack, configure it to handle TTF files using <code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); font-family: var(--font-mono)">url-loader</code> or <code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); font-family: var(--font-mono)">file-loader</code>:
+        </p>
+        <div class="code-block mb-6">
+          <pre class="p-4"><code>{'{'}
+  test: /\\.ttf$/,
+  loader: "url-loader", // or directly file-loader
+  include: path.resolve(__dirname, "node_modules/react-native-vector-icons"),
+{'}'}</code></pre>
+        </div>
+
+        <p class="leading-relaxed mb-4" style="color: var(--color-text-muted)">
+          Then, in your JavaScript entry point, consume the font files and inject the necessary style tag:
+        </p>
+        <div class="code-block mb-4">
+          <pre class="p-4"><code>import Icon from '@react-native-vector-icons/fontAwesome';
+import iconFont from '@react-native-vector-icons/fontawesome/fonts/FontAwesome.ttf';
+
+const iconFontStyles = `@font-face {'{'}
+  src: url(${'{'}iconFont{'}'});
+  font-family: FontAwesome;
+{'}'}`;
+
+const style = document.createElement('style');
+style.type = 'text/css';
+if (style.styleSheet) {'{'}
+  style.styleSheet.cssText = iconFontStyles;
+{'}'} else {'{'}
+  style.appendChild(document.createTextNode(iconFontStyles));
+{'}'}
+document.head.appendChild(style);</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Font Location Customisation -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold mb-6" style="font-family: var(--font-heading); color: var(--color-text)">
+        Font Location Customisation
+      </h2>
+      <p class="leading-relaxed mb-4" style="color: var(--color-text-muted)">
+        For fonts like FontAwesome Pro, Fontello, and Icomoon where you provide the fonts yourself, the default location for font files is
+        <code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); color: var(--color-accent-cyan); font-family: var(--font-mono)">rnvi-fonts</code>
+        in the same directory as your <code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); font-family: var(--font-mono)">package.json</code>.
+        This can be customised by setting the <code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); font-family: var(--font-mono)">fontDir</code> property:
+      </p>
+      <div class="code-block">
+        <pre class="p-4"><code>{'{'}
+  "reactNativeVectorIcons": {'{'}
+    "fontDir": "src/rnvi-fonts"
+  {'}'}
+{'}'}</code></pre>
+      </div>
+    </section>
+
+  </div>
+
+  <style>
+    .platform-tab {
+      background-color: var(--color-surface);
+      color: var(--color-text-muted);
+      border: 1px solid var(--color-border);
+      cursor: pointer;
+    }
+    .platform-tab:hover {
+      background-color: var(--color-surface-hover);
+      color: var(--color-text);
+    }
+    .platform-tab.active {
+      background-color: var(--color-accent-cyan);
+      color: var(--color-bg);
+      border-color: var(--color-accent-cyan);
+    }
+  </style>
+
+  <script>
+    document.querySelectorAll('.platform-tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.platform-tab').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const tab = btn.getAttribute('data-tab');
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+        document.getElementById(`tab-${tab}`)?.classList.remove('hidden');
+      });
+    });
+  </script>
+</BaseLayout>

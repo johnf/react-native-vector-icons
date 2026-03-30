@@ -1,0 +1,205 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Usage" description="How to use React Native Vector Icons components, props, and image sources">
+  <div class="mx-auto max-w-4xl px-4 py-12 sm:px-6">
+
+    <!-- Page Header -->
+    <h1 class="gradient-text text-4xl font-bold mb-4" style="font-family: var(--font-heading)">
+      Usage
+    </h1>
+    <p class="text-lg leading-relaxed mb-12" style="color: var(--color-text-muted)">
+      Learn how to use icon components, customise their appearance, and generate bitmap images.
+    </p>
+
+    <!-- Icon Component -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold mb-6" style="font-family: var(--font-heading); color: var(--color-text)">
+        Icon Component
+      </h2>
+      <p class="leading-relaxed mb-4" style="color: var(--color-text-muted)">
+        You can use one of the bundled icon sets or roll your own custom font. Import the icon family you need:
+      </p>
+
+      <h3 class="text-lg font-semibold mb-3" style="font-family: var(--font-heading); color: var(--color-accent-cyan)">
+        Bundled Import (with dynamic loading)
+      </h3>
+      <div class="code-block terminal-dots mb-6">
+        <pre class="px-4 pb-4 pt-2"><code>import {'{'} FontAwesomeFreeSolid {'}'} from "@react-native-vector-icons/fontawesome-free-solid";
+
+&lt;FontAwesomeFreeSolid name="rocket" size={'{'}30{'}'} color="#900" /&gt;</code></pre>
+      </div>
+
+      <h3 class="text-lg font-semibold mb-3" style="font-family: var(--font-heading); color: var(--color-accent-cyan)">
+        Static Import (smaller bundle)
+      </h3>
+      <p class="leading-relaxed mb-4" style="color: var(--color-text-muted)">
+        If you do not need
+        <a href="/advanced#dynamic-loading" class="underline-offset-2 hover:underline" style="color: var(--color-accent-cyan)">dynamic font loading</a>,
+        use the <code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); font-family: var(--font-mono)">/static</code> import for a slightly smaller bundle size:
+      </p>
+      <div class="code-block terminal-dots mb-6">
+        <pre class="px-4 pb-4 pt-2"><code>import {'{'} FontAwesomeFreeSolid {'}'} from "@react-native-vector-icons/fontawesome-free-solid/static";</code></pre>
+      </div>
+
+      <h3 class="text-lg font-semibold mb-3" style="font-family: var(--font-heading); color: var(--color-accent-cyan)">
+        Inline Example
+      </h3>
+      <div class="code-block mb-6">
+        <pre class="p-4"><code>import {'{'} Text {'}'} from "react-native";
+import {'{'} IonIcons {'}'} from "@react-native-vector-icons/ionicons/static";
+
+const ExampleView = (props) =&gt; (
+  &lt;Text&gt;
+    Lorem &lt;IonIcons name="ios-book" color="#4F8EF7" /&gt; Ipsum
+  &lt;/Text&gt;
+);</code></pre>
+      </div>
+    </section>
+
+    <!-- Props -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold mb-6" style="font-family: var(--font-heading); color: var(--color-text)">
+        Props
+      </h2>
+      <p class="leading-relaxed mb-4" style="color: var(--color-text-muted)">
+        Icon components accept any
+        <a href="https://reactnative.dev/docs/text.html#props" class="underline-offset-2 hover:underline" style="color: var(--color-accent-cyan)" target="_blank" rel="noopener">Text prop</a>
+        plus the following:
+      </p>
+      <div class="overflow-x-auto rounded-lg border" style="border-color: var(--color-border)">
+        <table class="w-full text-sm" style="border-collapse: collapse">
+          <thead>
+            <tr style="background-color: var(--color-surface)">
+              <th class="text-left px-4 py-3 font-semibold" style="font-family: var(--font-heading); color: var(--color-text); border-bottom: 1px solid var(--color-border)">Prop</th>
+              <th class="text-left px-4 py-3 font-semibold" style="font-family: var(--font-heading); color: var(--color-text); border-bottom: 1px solid var(--color-border)">Description</th>
+              <th class="text-left px-4 py-3 font-semibold" style="font-family: var(--font-heading); color: var(--color-text); border-bottom: 1px solid var(--color-border)">Default</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--color-border)">
+              <td class="px-4 py-3" style="color: var(--color-accent-cyan); font-family: var(--font-mono)">size</td>
+              <td class="px-4 py-3" style="color: var(--color-text-muted)">Size of the icon. Can also be passed as <code class="text-xs px-1 py-0.5 rounded" style="background-color: var(--color-surface); font-family: var(--font-mono)">fontSize</code> in the style object.</td>
+              <td class="px-4 py-3" style="color: var(--color-text-dim); font-family: var(--font-mono)">12</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--color-border)">
+              <td class="px-4 py-3" style="color: var(--color-accent-cyan); font-family: var(--font-mono)">name</td>
+              <td class="px-4 py-3" style="color: var(--color-text-muted)">Which icon to show. See the <a href="/directory" class="underline-offset-2 hover:underline" style="color: var(--color-accent-cyan)">Icon Directory</a> to browse available icons.</td>
+              <td class="px-4 py-3" style="color: var(--color-text-dim); font-style: italic">None</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3" style="color: var(--color-accent-cyan); font-family: var(--font-mono)">color</td>
+              <td class="px-4 py-3" style="color: var(--color-text-muted)">Colour of the icon.</td>
+              <td class="px-4 py-3" style="color: var(--color-text-dim); font-style: italic">Inherited</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Styling -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold mb-6" style="font-family: var(--font-heading); color: var(--color-text)">
+        Styling
+      </h2>
+      <p class="leading-relaxed mb-4" style="color: var(--color-text-muted)">
+        Since <code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); font-family: var(--font-mono)">Icon</code> builds on top of the
+        <code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); font-family: var(--font-mono)">Text</code> component, most
+        <a href="https://reactnative.dev/docs/style.html" class="underline-offset-2 hover:underline" style="color: var(--color-accent-cyan)" target="_blank" rel="noopener">style properties</a>
+        work as expected. Useful properties include:
+      </p>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
+        {["backgroundColor", "borderWidth", "borderColor", "borderRadius", "padding", "margin", "color", "fontSize"].map(prop => (
+          <div class="px-3 py-2 rounded-lg text-sm" style={`background-color: var(--color-surface); color: var(--color-accent-cyan); font-family: var(--font-mono); border: 1px solid var(--color-border)`}>
+            {prop}
+          </div>
+        ))}
+      </div>
+      <p class="leading-relaxed" style="color: var(--color-text-muted)">
+        By combining these you can create rounded icon buttons, bordered icon badges, and more.
+      </p>
+    </section>
+
+    <!-- PNG Image/Source Object -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold mb-6" style="font-family: var(--font-heading); color: var(--color-text)">
+        Usage as PNG Image / Source Object
+      </h2>
+      <p class="leading-relaxed mb-4" style="color: var(--color-text-muted)">
+        A convenient way to use icons in components that rely on bitmap images rather than scalable vector icons.
+        You need to use Expo (with <code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); font-family: var(--font-mono)">expo-font</code> installed)
+        <em>or</em> install <code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); font-family: var(--font-mono)">@react-native-vector-icons/get-image</code>.
+      </p>
+      <p class="leading-relaxed mb-4" style="color: var(--color-text-muted)">
+        Both methods return an <code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); font-family: var(--font-mono)">ImageResult</code> object
+        (<code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); font-family: var(--font-mono)">{'{ uri, width, height, scale }'}</code>)
+        that can be passed directly as an <code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); font-family: var(--font-mono)">Image</code> source.
+      </p>
+
+      <h3 class="text-lg font-semibold mb-3" style="font-family: var(--font-heading); color: var(--color-accent-cyan)">
+        Synchronous
+      </h3>
+      <div class="code-block terminal-dots mb-6">
+        <pre class="px-4 pb-4 pt-2"><code>const source = Icon.getImageSourceSync('user', 20, 'red');
+// or with an options object:
+const source = Icon.getImageSourceSync('user', {'{'} size: 20, color: 'red', lineHeight: 28 {'}'});
+
+return &lt;Image source={'{'}source{'}'} /&gt;;</code></pre>
+      </div>
+
+      <div class="p-4 rounded-lg border-l-4 mb-6" style="background-color: var(--color-surface); border-color: #f59e0b;">
+        <p class="text-sm font-medium mb-1" style="color: #f59e0b; font-family: var(--font-heading)">Performance Note</p>
+        <p class="text-sm leading-relaxed" style="color: var(--color-text-muted)">
+          <code class="text-xs px-1 py-0.5 rounded" style="background-color: var(--color-bg); font-family: var(--font-mono)">getImageSourceSync</code> is blocking and might incur performance penalties. Subsequent calls use a cache.
+        </p>
+      </div>
+
+      <h3 class="text-lg font-semibold mb-3" style="font-family: var(--font-heading); color: var(--color-accent-cyan)">
+        Asynchronous
+      </h3>
+      <div class="code-block terminal-dots mb-6">
+        <pre class="px-4 pb-4 pt-2"><code>const source = await Icon.getImageSource('user', 20, 'red');
+// or with an options object:
+const source = await Icon.getImageSource('user', {'{'} size: 20, color: 'red' {'}'});</code></pre>
+      </div>
+    </section>
+
+    <!-- Static Methods -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold mb-6" style="font-family: var(--font-heading); color: var(--color-text)">
+        Static Methods
+      </h2>
+      <p class="leading-relaxed mb-4" style="color: var(--color-text-muted)">
+        All static methods from <code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); font-family: var(--font-mono)">Icon</code> are supported by multi-styled fonts.
+      </p>
+      <div class="overflow-x-auto rounded-lg border" style="border-color: var(--color-border)">
+        <table class="w-full text-sm" style="border-collapse: collapse">
+          <thead>
+            <tr style="background-color: var(--color-surface)">
+              <th class="text-left px-4 py-3 font-semibold" style="font-family: var(--font-heading); color: var(--color-text); border-bottom: 1px solid var(--color-border)">Method</th>
+              <th class="text-left px-4 py-3 font-semibold" style="font-family: var(--font-heading); color: var(--color-text); border-bottom: 1px solid var(--color-border)">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--color-border)">
+              <td class="px-4 py-3 whitespace-nowrap" style="color: var(--color-accent-cyan); font-family: var(--font-mono)">getImageSource</td>
+              <td class="px-4 py-3" style="color: var(--color-text-muted)">
+                Returns a promise resolving to an <code class="text-xs px-1 py-0.5 rounded" style="background-color: var(--color-surface); font-family: var(--font-mono)">ImageResult</code> of a bitmap version of the icon.<br />
+                <code class="text-xs mt-1 inline-block" style="color: var(--color-text-dim); font-family: var(--font-mono)">const source = await Icon.getImageSource(name, {'{'} size, color, lineHeight {'}'})</code>
+              </td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 whitespace-nowrap" style="color: var(--color-accent-cyan); font-family: var(--font-mono)">getImageSourceSync</td>
+              <td class="px-4 py-3" style="color: var(--color-text-muted)">
+                Same as <code class="text-xs px-1 py-0.5 rounded" style="background-color: var(--color-surface); font-family: var(--font-mono)">getImageSource</code> but synchronous.<br />
+                <code class="text-xs mt-1 inline-block" style="color: var(--color-text-dim); font-family: var(--font-mono)">const source = Icon.getImageSourceSync(name, {'{'} size, color, lineHeight {'}'})</code>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>

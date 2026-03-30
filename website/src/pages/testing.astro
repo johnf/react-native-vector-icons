@@ -1,0 +1,83 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Testing" description="Configure Jest to work with React Native Vector Icons">
+  <div class="mx-auto max-w-4xl px-4 py-12 sm:px-6">
+
+    <!-- Page Header -->
+    <h1 class="gradient-text text-4xl font-bold mb-4" style="font-family: var(--font-heading)">
+      Testing
+    </h1>
+    <p class="text-lg leading-relaxed mb-12" style="color: var(--color-text-muted)">
+      Configure Jest to mock native font loading and prevent errors in your test suite.
+    </p>
+
+    <!-- Jest Configuration -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold mb-6" style="font-family: var(--font-heading); color: var(--color-text)">
+        Jest Configuration
+      </h2>
+      <p class="leading-relaxed mb-4" style="color: var(--color-text-muted)">
+        When running tests with <code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); color: var(--color-accent-cyan); font-family: var(--font-mono)">jest</code>,
+        you need to mock out the native code loading to prevent errors.
+      </p>
+
+      <h3 class="text-lg font-semibold mb-3" style="font-family: var(--font-heading); color: var(--color-accent-cyan)">
+        1. Add moduleNameMapper for TTF files
+      </h3>
+      <p class="leading-relaxed mb-4" style="color: var(--color-text-muted)">
+        In your <code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); font-family: var(--font-mono)">jest.config.js</code>, add a module name mapper to intercept
+        <code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); font-family: var(--font-mono)">.ttf</code> imports:
+      </p>
+      <div class="code-block terminal-dots mb-8">
+        <pre class="px-4 pb-4 pt-2"><code>// jest.config.js
+module.exports = {'{'}
+  // ...other config
+  moduleNameMapper: {'{'}
+    '\\.(ttf)$': '&lt;rootDir&gt;/__mocks__/file-mock.js',
+  {'}'},
+{'}'}</code></pre>
+      </div>
+
+      <h3 class="text-lg font-semibold mb-3" style="font-family: var(--font-heading); color: var(--color-accent-cyan)">
+        2. Create the file mock
+      </h3>
+      <p class="leading-relaxed mb-4" style="color: var(--color-text-muted)">
+        Create <code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); font-family: var(--font-mono)">__mocks__/file-mock.js</code>:
+      </p>
+      <div class="code-block terminal-dots mb-8">
+        <pre class="px-4 pb-4 pt-2"><code>// __mocks__/file-mock.js
+module.exports = {'{}'};</code></pre>
+      </div>
+
+      <h3 class="text-lg font-semibold mb-3" style="font-family: var(--font-heading); color: var(--color-accent-cyan)">
+        3. Mock the common library
+      </h3>
+      <p class="leading-relaxed mb-4" style="color: var(--color-text-muted)">
+        Create <code class="px-1.5 py-0.5 rounded text-sm" style="background-color: var(--color-surface); font-family: var(--font-mono)">__mocks__/@react-native-vector-icons/common.js</code>
+        to prevent native module loading errors:
+      </p>
+      <div class="code-block terminal-dots mb-4">
+        <pre class="px-4 pb-4 pt-2"><code>// __mocks__/@react-native-vector-icons/common.js
+module.exports = {'{'}
+  createIconSet: () =&gt; "icon",
+{'}'};</code></pre>
+      </div>
+    </section>
+
+    <!-- Summary -->
+    <section class="mb-16">
+      <div class="p-4 rounded-lg border-l-4" style="background-color: var(--color-surface); border-color: var(--color-accent-cyan);">
+        <p class="text-sm font-medium mb-1" style="color: var(--color-accent-cyan); font-family: var(--font-heading)">Summary</p>
+        <p class="text-sm leading-relaxed" style="color: var(--color-text-muted)">
+          With these three files in place, Jest will be able to run your tests without encountering native font loading errors.
+          The TTF mapper redirects font imports to an empty module, and the common library mock replaces
+          <code class="text-xs px-1 py-0.5 rounded" style="background-color: var(--color-bg); font-family: var(--font-mono)">createIconSet</code>
+          with a no-op.
+        </p>
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>

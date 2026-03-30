@@ -1,0 +1,9 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { Directory } from "../components/directory/Directory";
+import glyphmapIndex from "../data/generated/glyphmapIndex.json";
+---
+
+<BaseLayout title="Icon Directory" description="Browse and search over 70,000 icons from 34 font families">
+  <Directory client:load glyphmapIndex={glyphmapIndex} />
+</BaseLayout>
